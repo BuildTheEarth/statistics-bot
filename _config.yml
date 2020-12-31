@@ -1,0 +1,13 @@
+token: ""
+devs: []
+databases:
+    main:
+        host: ""
+        name: ""
+        user: ""
+        pass: ""
+    stats:
+        host: ""
+        name: ""
+        user: ""
+        pass: ""
