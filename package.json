@@ -2,7 +2,10 @@
     "name": "statistics-bot",
     "version": "0.0.0",
     "description": "The statistics-gathering and reporting bot for the BuildTheEarth Discord server.",
-    "dependencies": {},
+    "dependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.11.1",
+        "@typescript-eslint/parser": "^4.11.1"
+    },
     "devDependencies": {
         "eslint": "^7.16.0",
         "eslint-config-prettier": "^7.1.0",
