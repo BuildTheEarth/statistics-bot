@@ -4,6 +4,8 @@
     "description": "The statistics-gathering and reporting bot for the BuildTheEarth Discord server.",
     "dependencies": {},
     "devDependencies": {
+        "eslint": "^7.16.0",
+        "eslint-config-prettier": "^7.1.0",
         "typescript": "^4.1.3"
     },
     "scripts": {
