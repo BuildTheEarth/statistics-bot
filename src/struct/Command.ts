@@ -15,7 +15,7 @@ export default abstract class Command {
 }
 
 export interface CommandOption<R = boolean, P = boolean> {
-    positional: P
+    positional?: P
     name: string
     abbr?: P extends true ? null : string
     required?: R extends true ? true : false
