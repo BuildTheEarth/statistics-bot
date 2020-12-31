@@ -1,0 +1,15 @@
+{
+    "name": "statistics-bot",
+    "version": "0.0.0",
+    "description": "The statistics-gathering and reporting bot for the BuildTheEarth Discord server.",
+    "dependencies": {},
+    "devDependencies": {},
+    "scripts": {
+        "start": "node dist/index.js --unhandled-rejections=strict"
+    },
+    "repository": "BuildTheEarth/statistics-bot",
+    "author": "BuildTheEarth",
+    "license": "MIT",
+    "bugs": "https://github.com/BuildTheEarth/statistics-bot/issues",
+    "homepage": "https://github.com/BuildTheEarth/statistics-bot#readme"
+}
