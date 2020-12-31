@@ -1,6 +1,6 @@
 <div align="center">
 
-<img width="128" src="https://buildtheearth.net/assets/img/site-logo-animated.gif" />
+<img width="128" src="assets/logo.gif" />
 
 # statistics bot
 
