@@ -6,8 +6,8 @@ import Command from "./Command"
 
 export default class Client extends Discord.Client {
     config: Config
-    commands: Map<string, Command>
-    events: Map<string, (...args: unknown[]) => unknown>
+    commands = new Map<string, Command>()
+    events = new Map<string, (...args: unknown[]) => unknown>()
     logger = createLogger({ filePath: __dirname + "/../../logs" })
 
     async loadConfig(path: string): Promise<void> {
@@ -28,9 +28,10 @@ export default class Client extends Discord.Client {
     async loadEvents(path: string): Promise<void> {
         const names = await fs.readdir(path)
         for (const name of names) {
+            const event = name.replace(/.js$/, "")
             const handler = (await import(`${path}/${name}`)).default.bind(this)
-            this.events.set(handler.name, handler)
-            this.on(handler.name, handler)
+            this.events.set(event, handler)
+            this.on(event, handler)
         }
     }
 
