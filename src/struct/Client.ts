@@ -31,6 +31,7 @@ export default class Client extends Discord.Client {
 
 export interface Config {
     token: string
+    prefix: string
     devs: string[]
     databases: { main: Database; stats: Database }
 }
