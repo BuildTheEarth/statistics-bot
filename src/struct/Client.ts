@@ -13,7 +13,7 @@ export default class Client extends Discord.Client {
     async loadConfig(path: string): Promise<void> {
         const content = await fs.readFile(path, "utf-8")
         const config: Config = YAML.parse(content)
-        Object.assign(this.config, config)
+        this.config = config
     }
 
     async loadCommands(path: string): Promise<void> {
