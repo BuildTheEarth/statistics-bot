@@ -28,8 +28,9 @@ export default class Client extends Discord.Client {
     async loadEvents(path: string): Promise<void> {
         const names = await fs.readdir(path)
         for (const name of names) {
-            const handler = (await import(`${path}/${name}`)).default
+            const handler = (await import(`${path}/${name}`)).default.bind(this)
             this.events.set(handler.name, handler)
+            this.on(handler.name, handler)
         }
     }
 
