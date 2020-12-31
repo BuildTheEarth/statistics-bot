@@ -11,6 +11,10 @@ async function main(): Promise<void> {
     await client.loadCommands(__dirname + "/commands")
     client.logger.info("Loaded commands.")
 
+    client.logger.debug("Loading events...")
+    await client.loadEvents(__dirname + "/events")
+    client.logger.info("Loaded events.")
+
     client.logger.debug("Logging in...")
     await client.login()
     client.logger.info("Logged in.")
