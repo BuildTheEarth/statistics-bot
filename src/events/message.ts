@@ -16,6 +16,7 @@ export default async function message(
 
     const command = this.commands.find(c => c.name === name || c.aliases.includes(name))
     if (!command) return
+    if (command.dev && !this.config.devs.includes(message.author.id)) return
 
     await command.run(message, {})
 }
