@@ -35,7 +35,5 @@ export default async function message(
         }
     }
 
-    message.channel.send(`\`\`\`${JSON.stringify(parsed, null, 4)}\`\`\``)
-
     await command.run(message, {})
 }
