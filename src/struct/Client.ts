@@ -2,7 +2,7 @@ import fs from "fs/promises"
 import YAML from "yaml"
 import Discord from "discord.js"
 import createLogger from "@buildtheearth/bot-logger"
-import Command from "./Command"
+import Command, { CommandSubclass } from "./Command"
 
 export default class Client extends Discord.Client {
     config: Config
@@ -20,8 +20,8 @@ export default class Client extends Discord.Client {
         const contents = await fs.readdir(path)
         const commands = contents.filter(name => name.endsWith(".js"))
         for (const name of commands) {
-            const Cmd: new () => Command = (await import(`${path}/${name}`)).default
-            const command = new Cmd()
+            const Cmd: CommandSubclass = (await import(`${path}/${name}`)).default
+            const command = new Cmd(this)
             this.commands.set(command.name, command)
         }
     }

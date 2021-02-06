@@ -1,6 +1,8 @@
 import Discord from "discord.js"
+import Client from "./Client"
 
 export default abstract class Command {
+    client: Client
     abstract name: string
     abstract description: string
     abstract aliases: string[]
@@ -12,6 +14,10 @@ export default abstract class Command {
         message: Discord.Message,
         options: Record<string, unknown>
     ): Promise<void> | void
+
+    constructor(client: Client) {
+        this.client = client
+    }
 }
 
 export interface CommandOption {
@@ -22,3 +28,5 @@ export interface CommandOption {
     default?: unknown
     description: string
 }
+
+export type CommandSubclass = new (client: Client) => Command
