@@ -1,24 +1,24 @@
 import Discord from "discord.js"
 
 export default abstract class Command {
-    static command: string
-    static description: string
-    static aliases: string[]
-    static options: CommandOption[]
-    static dev: boolean = false
+    abstract name: string
+    abstract description: string
+    abstract aliases: string[]
+    abstract options: CommandOption[]
+    dev: boolean = false
 
-    static subcommands: Command[] = []
-    static run: (
+    subcommands: Command[] = []
+    abstract run(
         message: Discord.Message,
-        options: { [name: string]: unknown }
-    ) => Promise<void>
+        options: Record<string, unknown>
+    ): Promise<void> | void
 }
 
-export interface CommandOption<R = boolean, P = boolean> {
-    positional?: P
+export interface CommandOption {
+    positional?: boolean
     name: string
-    abbr?: P extends true ? null : string
-    required?: R extends true ? true : false
-    default?: R extends true ? null : unknown
+    abbr?: string
+    required?: boolean
+    default?: unknown
     description: string
 }
