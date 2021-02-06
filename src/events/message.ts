@@ -1,5 +1,8 @@
 import Discord from "discord.js"
 import Client from "../struct/Client"
+import Yargs from "yargs"
+
+// * https://stackoverflow.com/a/16261693
 
 export default async function message(
     this: Client,
@@ -9,14 +12,30 @@ export default async function message(
     if (!message.content.startsWith(this.config.prefix)) return
 
     const body = message.content.slice(this.config.prefix.length).trim()
-    const split = body.split(" ")
-    const name = split[0].toLowerCase()
-    const options = split.slice(1).join(" ").trim()
-    options // unused variable placeholder
+    const split = Array.from(body.match(/(?:[^\s"]+|"[^"]*")+/g)) // *
+    const parsed = Yargs(split).argv
 
-    const command = this.commands.find(c => c.name === name || c.aliases.includes(name))
+    parsed._ = parsed._.map(String)
+    const name = (parsed._.shift() as string).toLowerCase()
+
+    let command = this.commands.find(cmd => cmd.triggers(name))
     if (!command) return
     if (command.dev && !this.config.devs.includes(message.author.id)) return
+
+    let lastReached = false
+    while (!lastReached) {
+        const nextName = parsed._[0] as string
+        const nextCommand = command.subcommands.find(cmd => cmd.triggers(nextName))
+        if (!nextCommand) {
+            lastReached = true
+            break
+        } else {
+            parsed._.shift()
+            command = nextCommand
+        }
+    }
+
+    message.channel.send(`\`\`\`${JSON.stringify(parsed, null, 4)}\`\`\``)
 
     await command.run(message, {})
 }
