@@ -6,8 +6,8 @@ import Command from "./Command"
 
 export default class Client extends Discord.Client {
     config: Config
-    commands = new Map<string, Command>()
-    events = new Map<string, (...args: unknown[]) => unknown>()
+    commands = new Discord.Collection<string, Command>()
+    events = new Discord.Collection<string, (...args: unknown[]) => unknown>()
     logger = createLogger({ filePath: __dirname + "/../../logs" })
 
     async loadConfig(path: string): Promise<void> {
