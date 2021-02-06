@@ -21,6 +21,10 @@ export default abstract class Command {
         const This = this.constructor as typeof Command
         this.subcommands = This.subcommands.map(Cmd => new Cmd(client))
     }
+
+    triggers(name: string): boolean {
+        return this.name === name || this.aliases.includes(name)
+    }
 }
 
 export interface CommandOption {
