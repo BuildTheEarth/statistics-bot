@@ -9,7 +9,8 @@ export default abstract class Command {
     abstract options: CommandOption[]
     dev: boolean = false
 
-    subcommands: Command[] = []
+    static subcommands: CommandSubclass[] = []
+    subcommands: Command[]
     abstract run(
         message: Discord.Message,
         options: Record<string, unknown>
@@ -17,6 +18,8 @@ export default abstract class Command {
 
     constructor(client: Client) {
         this.client = client
+        const This = this.constructor as typeof Command
+        this.subcommands = This.subcommands.map(Cmd => new Cmd(client))
     }
 }
 
