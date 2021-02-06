@@ -20,8 +20,9 @@ export default class Client extends Discord.Client {
         const contents = await fs.readdir(path)
         const commands = contents.filter(name => name.endsWith(".js"))
         for (const name of commands) {
-            const command: typeof Command = (await import(`${path}/${name}`)).default
-            this.commands.set(command.command, command)
+            const Cmd: new () => Command = (await import(`${path}/${name}`)).default
+            const command = new Cmd()
+            this.commands.set(command.name, command)
         }
     }
 
