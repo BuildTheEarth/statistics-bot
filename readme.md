@@ -31,6 +31,10 @@ Join us in this massive project as we recreate the Earth in Minecraft, in 1:1 sc
 
 This project follows the [All Contributors][] specification. Contributions of any kind are welcome!
 
+## Usage
+
+The bot uses a terminal-like interface for its commands, which includes hyphen flags/options, and (soon:tm:) command piping. This is needed as its amount of features would make a usual Discord bot-like syntax unmanageable for everyone involved.
+
 <!-- References -->
 
 [invite]: https://discord.gg/QEkPmBy
