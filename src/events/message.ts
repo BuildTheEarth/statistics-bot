@@ -13,7 +13,7 @@ export default async function message(
 
     const body = message.content.slice(this.config.prefix.length).trim()
     const split = Array.from(body.match(/(?:[^\s"]+|"[^"]*")+/g)) // *
-    const parsed = Yargs(split).argv
+    const parsed = Yargs(split).help(false).argv
 
     parsed._ = parsed._.map(String)
     const name = (parsed._.shift() as string).toLowerCase()
