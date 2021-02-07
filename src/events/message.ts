@@ -35,5 +35,14 @@ export default async function message(
         }
     }
 
-    await command.run(message, {})
+    const options: Record<string, unknown> = {}
+    for (const option of command.options) {
+        let value: unknown
+        if (option.positional) value = parsed._.shift()
+        else value = parsed[option.name] || parsed[option.abbr]
+        // TODO: throw error if required and missing
+        options[option.name] = value
+    }
+
+    await command.run(message, options)
 }
