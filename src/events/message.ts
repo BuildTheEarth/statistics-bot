@@ -40,7 +40,17 @@ export default async function message(
         let value: unknown
         if (option.positional) value = parsed._.shift()
         else value = parsed[option.name] || parsed[option.abbr]
-        // TODO: throw error if required and missing
+
+        if (!value && option.required) {
+            const kind = option.positional ? " positional" : ""
+            return message.channel.send({
+                embed: {
+                    color: 0xed5439,
+                    description: `The \`${option.name}\`${kind} option is required.`
+                }
+            })
+        }
+
         options[option.name] = value
     }
 
