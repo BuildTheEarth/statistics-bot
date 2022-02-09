@@ -1,3 +1,5 @@
+# Deprecated
+
 <div align="center">
 
 <img width="128" src="assets/logo.gif" />
